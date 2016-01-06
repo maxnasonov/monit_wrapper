@@ -184,6 +184,84 @@ end
 
   <h2>Lightweight Resources</h2>
   
+    <h3><a name="Chef::Resource::MonitWrapperService">monit_wrapper_service</a></h3>
+    <ul>
+
+
+  <h4>Actions</h4>
+  
+  <ul><table>
+    <thead>
+      <th>Action</th>
+      <th>Description</th>
+    </thead>
+    <tbody>
+      
+        <tr class="r1">
+          <td><strong>start</strong></td>
+          <td>Starts the given Monit service.</td>
+        </tr>
+        
+      
+        <tr class="r2">
+          <td><strong>stop</strong></td>
+          <td>Stops the given Monit service.</td>
+        </tr>
+        
+      
+        <tr class="r1">
+          <td><strong>restart</strong></td>
+          <td>Restarts the given Monit service.</td>
+        </tr>
+        
+      
+        <tr class="r2">
+          <td><strong>nothing</strong></td>
+          <td>Does not do anything.</td>
+        </tr>
+        
+      
+    </tbody>
+  </table></ul>
+
+
+
+
+  <h4>Attributes</h4>
+  <ul>
+
+
+<table>
+  <thead>
+    <th>Attribute</th>
+    <th>Description</th>
+  </thead>
+  <tbody>
+    
+      <tr class="r1">
+        <td><strong>fallback_to_regular_service</strong></td>
+        <td>If this is specified and the service is not registered with Monit, it will be started as a
+regular service using the standard "service" resource.</td>
+      </tr>
+      
+    
+      <tr class="r2">
+        <td><strong>wait_for_host_port</strong></td>
+        <td>A host:port combination of another service. If this is specified, we wait for this the given host
+to start listening on the given TCP port before attempting to start or restart the service. This
+could be used for handling dependencies on remote services.</td>
+      </tr>
+      
+    
+  </tbody>
+</table>
+</ul>
+
+
+
+
+</ul>
+  
     <h3><a name="Chef::Resource::MonitWrapperMonitor">monit_wrapper_monitor</a></h3>
     <ul>
 
@@ -281,84 +359,6 @@ Monit service configuration file creation.</td>
 
 </ul>
   
-    <h3><a name="Chef::Resource::MonitWrapperService">monit_wrapper_service</a></h3>
-    <ul>
-
-
-  <h4>Actions</h4>
-  
-  <ul><table>
-    <thead>
-      <th>Action</th>
-      <th>Description</th>
-    </thead>
-    <tbody>
-      
-        <tr class="r1">
-          <td><strong>start</strong></td>
-          <td>Starts the given Monit service.</td>
-        </tr>
-        
-      
-        <tr class="r2">
-          <td><strong>stop</strong></td>
-          <td>Stops the given Monit service.</td>
-        </tr>
-        
-      
-        <tr class="r1">
-          <td><strong>restart</strong></td>
-          <td>Restarts the given Monit service.</td>
-        </tr>
-        
-      
-        <tr class="r2">
-          <td><strong>nothing</strong></td>
-          <td>Does not do anything.</td>
-        </tr>
-        
-      
-    </tbody>
-  </table></ul>
-
-
-
-
-  <h4>Attributes</h4>
-  <ul>
-
-
-<table>
-  <thead>
-    <th>Attribute</th>
-    <th>Description</th>
-  </thead>
-  <tbody>
-    
-      <tr class="r1">
-        <td><strong>fallback_to_regular_service</strong></td>
-        <td>If this is specified and the service is not registered with Monit, it will be started as a
-regular service using the standard "service" resource.</td>
-      </tr>
-      
-    
-      <tr class="r2">
-        <td><strong>wait_for_host_port</strong></td>
-        <td>A host:port combination of another service. If this is specified, we wait for this the given host
-to start listening on the given TCP port before attempting to start or restart the service. This
-could be used for handling dependencies on remote services.</td>
-      </tr>
-      
-    
-  </tbody>
-</table>
-</ul>
-
-
-
-
-</ul>
-  
     <h3><a name="Chef::Resource::MonitWrapperReloadAndWait">monit_wrapper_reload_and_wait</a></h3>
     <ul>
 
@@ -428,31 +428,6 @@ running.</td>
 
   <h2>Providers</h2>
   
-    <h3><a name="Chef::Provider::MonitWrapperMonitor">monit_wrapper_monitor</a></h3>
-    <ul>
-
-
-  <h4>Actions Summary</h4>
-  <ul class="summary">
-    
-      <li>
-        <span class="summary_signature">
-          <strong><a href="#create">create</a></strong>
-        </span>
-        <span class="summary_desc">Creates a configuration file for a new Monit-monitored service.</span>
-      </li>
-    
-      <li>
-        <span class="summary_signature">
-          <strong><a href="#delete">delete</a></strong>
-        </span>
-        <span class="summary_desc"></span>
-      </li>
-    
-  </ul>
-
-</ul>
-  
     <h3><a name="Chef::Provider::MonitWrapperService">monit_wrapper_service</a></h3>
     <ul>
 
@@ -479,6 +454,31 @@ running.</td>
           <strong><a href="#restart">restart</a></strong>
         </span>
         <span class="summary_desc">Restart the given Monit service.</span>
+      </li>
+    
+  </ul>
+
+</ul>
+  
+    <h3><a name="Chef::Provider::MonitWrapperMonitor">monit_wrapper_monitor</a></h3>
+    <ul>
+
+
+  <h4>Actions Summary</h4>
+  <ul class="summary">
+    
+      <li>
+        <span class="summary_signature">
+          <strong><a href="#create">create</a></strong>
+        </span>
+        <span class="summary_desc">Creates a configuration file for a new Monit-monitored service.</span>
+      </li>
+    
+      <li>
+        <span class="summary_signature">
+          <strong><a href="#delete">delete</a></strong>
+        </span>
+        <span class="summary_desc"></span>
       </li>
     
   </ul>
@@ -699,188 +699,6 @@ running.</td>
     
       
         <div class="method_details first">
-          <h3 class="signature"><a name="create">
-            <strong>create</strong>
-            &nbsp;(Chef::Provider::MonitWrapperMonitor)
-          </a></h3>
-          <p>Creates a configuration file for a new Monit-monitored service.</p>
-
-          
-
-<table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'providers/monitor.rb', line 28</span>
-
-<span class='id identifier rubyid_action'>action</span> <span class='symbol'>:create</span> <span class='kw'>do</span>  <span class='comment'># ~FC017
-</span>  <span class='comment'># We disable FC017 (LWRP does not notify when updated) because we are using
-</span>  <span class='comment'># notifying_action_wrapper that notifies all subscribers when the template is regenerated.
-</span>
-  <span class='id identifier rubyid_notifying_action_wrapper'>notifying_action_wrapper</span><span class='lparen'>(</span>
-    <span class='label'>allow_updates_from:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>template[</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_service_conf_path'>service_conf_path</span><span class='embexpr_end'>}</span><span class='tstring_content'>]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='label'>verbose:</span> <span class='kw'>true</span>
-  <span class='rparen'>)</span> <span class='kw'>do</span>
-    <span class='id identifier rubyid_wait_for_host_port'>wait_for_host_port</span><span class='lparen'>(</span><span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_wait_for_host_port'>wait_for_host_port</span><span class='rparen'>)</span>
-
-    <span class='id identifier rubyid_variables'>variables</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_variables'>variables</span> <span class='op'>||</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_hash'>to_hash</span><span class='period'>.</span><span class='id identifier rubyid_clone'>clone</span>
-
-    <span class='id identifier rubyid_variables'>variables</span><span class='lbracket'>[</span><span class='symbol'>:service_name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
-    <span class='id identifier rubyid_variables'>variables</span><span class='lbracket'>[</span><span class='symbol'>:pid_file</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_pid_file'>pid_file</span> <span class='kw'>if</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_pid_file'>pid_file</span>
-    <span class='id identifier rubyid_variables'>variables</span><span class='lbracket'>[</span><span class='symbol'>:pattern</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_pattern'>pattern</span> <span class='kw'>if</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_pattern'>pattern</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_java_class'>java_class</span>
-      <span class='id identifier rubyid_variables'>variables</span><span class='lbracket'>[</span><span class='symbol'>:pattern</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>^[^ ]*java .* </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_java_class'>java_class</span><span class='embexpr_end'>}</span><span class='tstring_content'>($| .*)</span><span class='tstring_end'>&quot;</span></span>
-    <span class='kw'>end</span>
-    <span class='kw'>if</span> <span class='lbracket'>[</span><span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_pid_file'>pid_file</span><span class='comma'>,</span>
-        <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_pattern'>pattern</span><span class='comma'>,</span>
-        <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_java_class'>java_class</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>1</span>
-      <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>No more than one of pid file, pattern, or Java class can be specified. </span><span class='tstring_end'>&#39;</span></span> <span class='op'>+</span>
-            <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Variables: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_variables'>variables</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='kw'>end</span>
-
-    <span class='const'>Chef</span><span class='op'>::</span><span class='const'>Log</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span><span class='lparen'>(</span>
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Creating Monit configuration file </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_service_conf_path'>service_conf_path</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span> \
-      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>for service </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-    <span class='rparen'>)</span>
-    <span class='id identifier rubyid_template'>template</span> <span class='id identifier rubyid_service_conf_path'>service_conf_path</span> <span class='kw'>do</span>
-      <span class='id identifier rubyid_owner'>owner</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>root</span><span class='tstring_end'>&#39;</span></span>
-      <span class='id identifier rubyid_group'>group</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>root</span><span class='tstring_end'>&#39;</span></span>
-      <span class='id identifier rubyid_mode'>mode</span>  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>0644</span><span class='tstring_end'>&#39;</span></span>
-      <span class='id identifier rubyid_source'>source</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_template_source'>template_source</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>service_wrapper.conf.erb</span><span class='tstring_end'>&#39;</span></span>
-      <span class='id identifier rubyid_cookbook'>cookbook</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_template_cookbook'>template_cookbook</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>monit_wrapper</span><span class='tstring_end'>&#39;</span></span>
-      <span class='id identifier rubyid_variables'>variables</span> <span class='id identifier rubyid_variables'>variables</span>
-      <span class='id identifier rubyid_action'>action</span> <span class='symbol'>:create</span>
-    <span class='kw'>end</span>
-
-    <span class='id identifier rubyid_file'>file</span> <span class='id identifier rubyid_deprecated_service_conf_path'>deprecated_service_conf_path</span> <span class='kw'>do</span>
-      <span class='id identifier rubyid_action'>action</span> <span class='symbol'>:delete</span>
-    <span class='kw'>end</span>
-
-    <span class='const'>Chef</span><span class='op'>::</span><span class='const'>Log</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Reloading Monit configuration and waiting for service </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_monit_wrapper_reload_and_wait'>monit_wrapper_reload_and_wait</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-
-        </div>
-      
-        <div class="method_details ">
-          <h3 class="signature"><a name="delete">
-            <strong>delete</strong>
-            &nbsp;(Chef::Provider::MonitWrapperMonitor)
-          </a></h3>
-          
-          
-
-<table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'providers/monitor.rb', line 76</span>
-
-<span class='id identifier rubyid_action'>action</span> <span class='symbol'>:delete</span> <span class='kw'>do</span>
-  <span class='kw'>if</span> <span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_exists?'>exists?</span><span class='lparen'>(</span><span class='id identifier rubyid_service_conf_path'>service_conf_path</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_file'>file</span> <span class='id identifier rubyid_service_conf_path'>service_conf_path</span> <span class='kw'>do</span>
-      <span class='id identifier rubyid_action'>action</span> <span class='symbol'>:delete</span>
-    <span class='kw'>end</span>
-
-    <span class='id identifier rubyid_file'>file</span> <span class='id identifier rubyid_deprecated_service_conf_path'>deprecated_service_conf_path</span> <span class='kw'>do</span>
-      <span class='id identifier rubyid_action'>action</span> <span class='symbol'>:delete</span>
-    <span class='kw'>end</span>
-
-    <span class='id identifier rubyid_bash'>bash</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>monit-reload-after-removing-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
-      <span class='id identifier rubyid_code'>code</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>monit reload</span><span class='tstring_end'>&#39;</span></span>
-    <span class='kw'>end</span>
-
-    <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_updated_by_last_action'>updated_by_last_action</span><span class='lparen'>(</span><span class='kw'>true</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-
-        </div>
-      
-    
-  
-    
-    
-      
-        <div class="method_details first">
           <h3 class="signature"><a name="start">
             <strong>start</strong>
             &nbsp;(Chef::Provider::MonitWrapperService)
@@ -1073,6 +891,188 @@ running.</td>
     
       
         <div class="method_details first">
+          <h3 class="signature"><a name="create">
+            <strong>create</strong>
+            &nbsp;(Chef::Provider::MonitWrapperMonitor)
+          </a></h3>
+          <p>Creates a configuration file for a new Monit-monitored service.</p>
+
+          
+
+<table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'providers/monitor.rb', line 28</span>
+
+<span class='id identifier rubyid_action'>action</span> <span class='symbol'>:create</span> <span class='kw'>do</span>  <span class='comment'># ~FC017
+</span>  <span class='comment'># We disable FC017 (LWRP does not notify when updated) because we are using
+</span>  <span class='comment'># notifying_action_wrapper that notifies all subscribers when the template is regenerated.
+</span>
+  <span class='id identifier rubyid_notifying_action_wrapper'>notifying_action_wrapper</span><span class='lparen'>(</span>
+    <span class='label'>allow_updates_from:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>template[</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_service_conf_path'>service_conf_path</span><span class='embexpr_end'>}</span><span class='tstring_content'>]</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='label'>verbose:</span> <span class='kw'>true</span>
+  <span class='rparen'>)</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_wait_for_host_port'>wait_for_host_port</span><span class='lparen'>(</span><span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_wait_for_host_port'>wait_for_host_port</span><span class='rparen'>)</span>
+
+    <span class='id identifier rubyid_variables'>variables</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_variables'>variables</span> <span class='op'>||</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_hash'>to_hash</span><span class='period'>.</span><span class='id identifier rubyid_clone'>clone</span>
+
+    <span class='id identifier rubyid_variables'>variables</span><span class='lbracket'>[</span><span class='symbol'>:service_name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+    <span class='id identifier rubyid_variables'>variables</span><span class='lbracket'>[</span><span class='symbol'>:pid_file</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_pid_file'>pid_file</span> <span class='kw'>if</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_pid_file'>pid_file</span>
+    <span class='id identifier rubyid_variables'>variables</span><span class='lbracket'>[</span><span class='symbol'>:pattern</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_pattern'>pattern</span> <span class='kw'>if</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_pattern'>pattern</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_java_class'>java_class</span>
+      <span class='id identifier rubyid_variables'>variables</span><span class='lbracket'>[</span><span class='symbol'>:pattern</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>^[^ ]*java .* </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_java_class'>java_class</span><span class='embexpr_end'>}</span><span class='tstring_content'>($| .*)</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    <span class='kw'>if</span> <span class='lbracket'>[</span><span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_pid_file'>pid_file</span><span class='comma'>,</span>
+        <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_pattern'>pattern</span><span class='comma'>,</span>
+        <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_java_class'>java_class</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>1</span>
+      <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>No more than one of pid file, pattern, or Java class can be specified. </span><span class='tstring_end'>&#39;</span></span> <span class='op'>+</span>
+            <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Variables: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_variables'>variables</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+
+    <span class='const'>Chef</span><span class='op'>::</span><span class='const'>Log</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span><span class='lparen'>(</span>
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Creating Monit configuration file </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_service_conf_path'>service_conf_path</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span> \
+      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>for service </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='rparen'>)</span>
+    <span class='id identifier rubyid_template'>template</span> <span class='id identifier rubyid_service_conf_path'>service_conf_path</span> <span class='kw'>do</span>
+      <span class='id identifier rubyid_owner'>owner</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>root</span><span class='tstring_end'>&#39;</span></span>
+      <span class='id identifier rubyid_group'>group</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>root</span><span class='tstring_end'>&#39;</span></span>
+      <span class='id identifier rubyid_mode'>mode</span>  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>0644</span><span class='tstring_end'>&#39;</span></span>
+      <span class='id identifier rubyid_source'>source</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_template_source'>template_source</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>service_wrapper.conf.erb</span><span class='tstring_end'>&#39;</span></span>
+      <span class='id identifier rubyid_cookbook'>cookbook</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_template_cookbook'>template_cookbook</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>monit_wrapper</span><span class='tstring_end'>&#39;</span></span>
+      <span class='id identifier rubyid_variables'>variables</span> <span class='id identifier rubyid_variables'>variables</span>
+      <span class='id identifier rubyid_action'>action</span> <span class='symbol'>:create</span>
+    <span class='kw'>end</span>
+
+    <span class='id identifier rubyid_file'>file</span> <span class='id identifier rubyid_deprecated_service_conf_path'>deprecated_service_conf_path</span> <span class='kw'>do</span>
+      <span class='id identifier rubyid_action'>action</span> <span class='symbol'>:delete</span>
+    <span class='kw'>end</span>
+
+    <span class='const'>Chef</span><span class='op'>::</span><span class='const'>Log</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Reloading Monit configuration and waiting for service </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_monit_wrapper_reload_and_wait'>monit_wrapper_reload_and_wait</span> <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+
+        </div>
+      
+        <div class="method_details ">
+          <h3 class="signature"><a name="delete">
+            <strong>delete</strong>
+            &nbsp;(Chef::Provider::MonitWrapperMonitor)
+          </a></h3>
+          
+          
+
+<table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'providers/monitor.rb', line 76</span>
+
+<span class='id identifier rubyid_action'>action</span> <span class='symbol'>:delete</span> <span class='kw'>do</span>
+  <span class='kw'>if</span> <span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_exists?'>exists?</span><span class='lparen'>(</span><span class='id identifier rubyid_service_conf_path'>service_conf_path</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_file'>file</span> <span class='id identifier rubyid_service_conf_path'>service_conf_path</span> <span class='kw'>do</span>
+      <span class='id identifier rubyid_action'>action</span> <span class='symbol'>:delete</span>
+    <span class='kw'>end</span>
+
+    <span class='id identifier rubyid_file'>file</span> <span class='id identifier rubyid_deprecated_service_conf_path'>deprecated_service_conf_path</span> <span class='kw'>do</span>
+      <span class='id identifier rubyid_action'>action</span> <span class='symbol'>:delete</span>
+    <span class='kw'>end</span>
+
+    <span class='id identifier rubyid_bash'>bash</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>monit-reload-after-removing-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
+      <span class='id identifier rubyid_code'>code</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>monit reload</span><span class='tstring_end'>&#39;</span></span>
+    <span class='kw'>end</span>
+
+    <span class='id identifier rubyid_new_resource'>new_resource</span><span class='period'>.</span><span class='id identifier rubyid_updated_by_last_action'>updated_by_last_action</span><span class='lparen'>(</span><span class='kw'>true</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+
+        </div>
+      
+    
+  
+    
+    
+      
+        <div class="method_details first">
           <h3 class="signature"><a name="reload_and_wait">
             <strong>reload_and_wait</strong>
             &nbsp;(Chef::Provider::MonitWrapperReloadAndWait)
@@ -1198,9 +1198,9 @@ running.</td>
 </div>
 
     <div id="footer">
-  Generated on Wed Aug 19 18:47:17 2015 by
+  Generated on Tue Jan  5 18:38:27 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.1.5).
+  0.8.7.6 (ruby-2.1.7).
 </div>
 
   </body>
