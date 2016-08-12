@@ -19,24 +19,22 @@ include Chef::MonitWrapper::StartStop
 action :start do  # ~FC017
   # We disable FC017 because notifying_action_wrapper takes care of notifications.
   service_name = new_resource.name
-  notifying_action_wrapper do
-    if monit_service_running?(service_name)
-      Chef::Log.info("Service #{service_name} is already running, skipping start action")
-    elsif monit_service_registered?(service_name)
-      wait_for_host_port(new_resource.wait_for_host_port)
-      unless monit_service_running?(service_name, verbose: true)
-        start_monit_service(service_name)
-      end
-    elsif new_resource.fallback_to_regular_service
-      wait_for_host_port(new_resource.wait_for_host_port)
-      Chef::Log.info(
-        "No Monit service #{service_name} registered, failling back to starting a regular service")
-      service service_name do
-        action :start
-      end
-    else
-      raise "Monit does not know about #{service_name} and fallback_to_regular_service is disabled"
+  if monit_service_running?(service_name)
+    Chef::Log.info("Service #{service_name} is already running, skipping start action")
+  elsif monit_service_registered?(service_name)
+    wait_for_host_port(new_resource.wait_for_host_port)
+    unless monit_service_running?(service_name, verbose: true)
+      start_monit_service(service_name)
     end
+  elsif new_resource.fallback_to_regular_service
+    wait_for_host_port(new_resource.wait_for_host_port)
+    Chef::Log.info(
+      "No Monit service #{service_name} registered, failling back to starting a regular service")
+    service service_name do
+      action :start
+    end
+  else
+    raise "Monit does not know about #{service_name} and fallback_to_regular_service is disabled"
   end
 end
 
@@ -44,18 +42,16 @@ end
 action :stop do  # ~FC017
   # We disable FC017 because notifying_action_wrapper takes care of notifications.
   service_name = new_resource.name
-  notifying_action_wrapper do
-    if monit_service_registered?(service_name)
-      stop_monit_service(service_name)
-    elsif new_resource.fallback_to_regular_service
-      Chef::Log.info(
-        "No Monit service #{service_name} registered, failling back to stopping a regular service")
-      service service_name do
-        action :stop
-      end
-    else
-      raise "Monit does not know about #{service_name} and fallback_to_regular_service is disabled"
+  if monit_service_registered?(service_name)
+    stop_monit_service(service_name)
+  elsif new_resource.fallback_to_regular_service
+    Chef::Log.info(
+      "No Monit service #{service_name} registered, failling back to stopping a regular service")
+    service service_name do
+      action :stop
     end
+  else
+    raise "Monit does not know about #{service_name} and fallback_to_regular_service is disabled"
   end
 end
 
@@ -68,11 +64,9 @@ action :restart do  # ~FC017
     command = 'start'
   end
   wait_for_host_port(new_resource.wait_for_host_port)
-  notifying_action_wrapper do
-    bash "monit-#{command}-#{new_resource.name}" do
-      user 'root'
-      code "#{node['monit']['executable']} #{command} #{new_resource.name}"
-      action :run
-    end
+  bash "monit-#{command}-#{new_resource.name}" do
+    user 'root'
+    code "#{node['monit']['executable']} #{command} #{new_resource.name}"
+    action :run
   end
 end

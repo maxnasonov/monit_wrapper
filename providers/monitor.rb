@@ -54,6 +54,11 @@ action :create do  # ~FC017
       "Creating Monit configuration file #{service_conf_path} " \
       "for service #{new_resource.name}"
     )
+
+    file deprecated_service_conf_path do
+      action :delete
+    end
+
     template service_conf_path do
       owner 'root'
       group 'root'
@@ -62,10 +67,6 @@ action :create do  # ~FC017
       cookbook new_resource.template_cookbook || 'monit_wrapper'
       variables variables
       action :create
-    end
-
-    file deprecated_service_conf_path do
-      action :delete
     end
 
     Chef::Log.info("Reloading Monit configuration and waiting for service #{new_resource.name}")
