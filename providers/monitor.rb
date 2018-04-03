@@ -67,10 +67,13 @@ action :create do  # ~FC017
       cookbook new_resource.template_cookbook || 'monit_wrapper'
       variables variables
       action :create
+      notifies :reload_and_wait, "monit_wrapper_reload_and_wait[#{new_resource.name}]"
     end
 
-    Chef::Log.info("Reloading Monit configuration and waiting for service #{new_resource.name}")
-    monit_wrapper_reload_and_wait new_resource.name
+    Chef::Log.info("Reloading Monit configuration and waiting for service #{new_resource.name} if needed")
+    monit_wrapper_reload_and_wait new_resource.name do
+      action :nothing
+    end
   end
 end
 
