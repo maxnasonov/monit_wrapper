@@ -126,6 +126,8 @@ class Chef
             # workaround.
             ensure_monit_daemon_is_running
             [false, stdout_stderr_combined]
+          elsif p.stderr[/Connection refused/]
+            puts p.stderr
           else
             if p.exitstatus != 0
               Chef::Log.fatal("Command '#{p.command}' failed\n" +
